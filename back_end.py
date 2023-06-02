@@ -12,6 +12,7 @@ mydb = pymysql.connect(
     password=""
 )
 
+test
 mycursor = mydb.cursor()
 
 class GCStorage :
