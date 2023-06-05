@@ -12,7 +12,7 @@ query = "INSERT INTO databasee(namafile) VALUES(%s)"
 data = [
     ("sawi")
     ]
-cursor.execute(query, data)
+cursor.executemany(query, data)
 
 db.commit()
 print("Data berhasil di insert")
