@@ -13,6 +13,42 @@ STORAGE_CLASSES = "STANDAR"
 )
 mycursor = mydb.cursor()
  """ 
+
+class Mysql:
+    def __init__(self, host, user, password, database):
+        self.mydb = pymysql.connect(host=host, user=user, password=password,database=database)
+    
+    def get_user(self, id_user,password):
+        mycursor = mydb.cursor()
+        query = "SELECT * FROM pengguna WHERE username = {id_user} & password = {password}"
+        mycursor.execute(query)
+        myresult = mycursor.fetchall()
+        if(len(myresult)>0):
+            return True
+        else:
+            return False
+    
+    def insert_user(self, id_user, password, email):
+        mycursor = mydb.cursor()
+        query = "INSERT INTO pengguna VALUES({id_user},{password},{email})"
+        mycursor.execute(query)
+
+        self.mydb.commit()
+        if(mycursor.rowcount>0):
+            return True
+        else:
+            return False
+
+    def insert_foto(self,id_user,nama_file,keterangan=""):
+        mycursor - mydb.cursor()
+        query ="INSERT INTO pengguna VALUES({id_user},{nama_file},{keterangan})"
+        mycursor.execute(query)
+        self.mydb.commit()
+        if(mycursor.rowcocunt>0):
+            return True
+        else:
+            return False
+
 class GCStorage :
     def __init__(self, client_storage):
         self.client = client_storage
