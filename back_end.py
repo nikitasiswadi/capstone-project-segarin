@@ -6,24 +6,17 @@ from google.cloud import storage
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'my-project-segarin-26678-bfc7835d7a7d.json'
 STORAGE_CLASSES = "STANDAR"
 
-mydb = pymysql.connect(
+""" mydb = pymysql.connect(
     host="localhost",
     user="root",
     password=""
 )
-
-test
 mycursor = mydb.cursor()
-
+ """ 
 class GCStorage :
     def __init__(self, client_storage):
         self.client = client_storage
-    def create_bucket(self, bucket_name, storage_class, bucket_location="ASIA-SOUTHEAST2"):
-        bucket = self.client.bucket(bucket_name)
-        bucket.storage_class = storage_class
-        bucket.location= bucket_location;
-        return self.client.create_bucket(bucket,bucket_location)
-    
+
     def get_bucket(self, bucket_name):
         return self.client.get_bucket(bucket_name)
     
@@ -37,7 +30,7 @@ class GCStorage :
         return blob
     
     def list_nama_blobs(self, bucket_name):
-        files = self.client.list_blobs(bucket_name)
+        files = self.client.list_blobs(bucket_name) #bisa menggunakan (foldername) pada argumentnya ex : ('bayam/') dan gunakan split untuk mendapatkan nama filenya
         return [file.name for file in files]
     
     def list_blobs(self, bucket_name):
@@ -47,6 +40,9 @@ class GCStorage :
 def main():
     bucket_name = "test_bucket_segarin"
     gcs = GCStorage(storage.Client())
-    print(gcs.list_nama_blobs(bucket_name)[0].split(".")[1])
+    gcs_labs = gcs.list_blobs(bucket_name)
 
+    for blob in gcs_labs:
+        path_download = os.getcwd()
+        blob.download_to_filename(os.path.join(path_download,blob.name))
 main()

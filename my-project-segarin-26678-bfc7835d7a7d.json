@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "my-project-segarin-26678",
+  "private_key_id": "bfc7835d7a7dc5cd6beef7bb9a705cd26f43ec3d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDchunNkZgwBt9F\nIjcEU63o++boYycau9OaXfcYWBZ7m7ez8PjKyu/sXU+MDhL4FBp618WiF03new7Z\n9qMJZJAHqxlugUkCDFao/FLVN3zgTyjMGKEvnDYvJXYsrDGQi4gJS7YIrby/9SXB\naOJoRKjsMKdX7DV2gcAP4lkZuadHEsoYAWIM1cZ0/Ih9rg/hxxFDeYRtt9f6XJKQ\nsGqOk5XYw+OxbS0aczNsSOhXZ//1TTk40M9hLwxIXs79XQIqWfZwIxI/xuh3KVz7\nvlzpMfiZLvvsCrWb2LqtTPGa/RfYDhRQhtpQfzSwVPoUlzqIyMg/u2zyR5+pAItt\n3aZWALsZAgMBAAECggEAMuupHXlGs6JGmDtOCl77G37dAuBwRV1E/1I+rd2bNWgP\nq0pTXFovO7wRE+UlDqjvs1lS7npkl/SDiaNIYrEYi9i/etN6BPHN6d+3jbmuCUpm\nAHiYcXqnzUugZbDOEhMR8pmLmyXo3UcxNF9wVgSyn7UdUvE9KBPOQiyxB75laIS5\nmAGK5q5jqKR+wU4F7O640AiDHvCUvV/7Ur8HBq8UNWR9BsPY9LB9n/Jvdonnr8D7\nuvvkIvR0EUMSuW9WibEgV64eetn1QztD5AC4zrT9WHN8yIk2A/7V75AO33C0KA7O\n0xdqu9S3RMpX1xeh6QlCYZZ7kw0OVUS1W7aXgk7+zQKBgQD3vp4iN2jpco+dG2h0\nwZk/sh/QwyvOL/8L7BAQH5NSSR3q+FFLx/Y5Zzw9NFy2fBTNiTHCmSeDVbCrglBk\nSjVLVfihMOrnWqTsn+NKij+r0mI4VECQVJiSH/m+VB8GqqSph4638l3GZtJq0yIs\nZE6gxKppdZ3FmLvBbQPfGWP6BQKBgQDj4B3AeZDFsodAn5HrLW5QiJyM/8RY9mrl\nPA1zRtwL6c3LopchDU6mAt2+DgGAP3efZcBZUgt8FDhNxd0K3vgNtc1poLW+pmLD\nfh1qMB+xAZsjb35ZLRDRRmWEqhAcK0J8GNWXwSRipwQ9DqxLFCdWs+fOL3CLGjgq\nuRxpDrvFBQKBgQCoMJSSjiN/OPMeqZjEixpLD9Zhl96JYDQ6F8zf5U/SsSjKeEJY\nvCwA1IEk3AOFL7+/ucA6aFdW5jnGdfW14FtGBduBMwCGiBcnPXTFCg4ny/A6ZZhf\nY88ghOy7tchKclbPcOQHJVdcdjmrpCKzGHX41wsKBXtSxlnQ+v2B3G7vMQKBgQCs\nzzVA1e/4PR9c3qYmF1nlMPSn6P7aCGWgWh5JIZ+WWUR7/V1m71SJiProOm7g90Cc\nXOm10wZqnlrkf/zVVan/m7OfOwUZA806O9XKxZwC/BjOkqrardZnHl+2b9Gvyw6s\nVZkFcK9LMSWBuDLo7Ou4UM6mCkvq8YNOwvrMoSO8kQKBgQCjFLSVTpgcE95YXFkB\nH+mRxRVXaVFav+4/N5hWyi26XUYmk4+/tCAqm8sTfpPtkT2OT20GW1WDQctOAmF1\nR+9eSUMYFybR1Ld+z4R4mV6OoLK18s3Fz2kV3P9Pl/qI/fXoBkubTxfc4C9PiViB\niP30M/vDI59NFjvFpCZyi4jjdg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloudstorage@my-project-segarin-26678.iam.gserviceaccount.com",
+  "client_id": "104458603958439570156",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloudstorage%40my-project-segarin-26678.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
