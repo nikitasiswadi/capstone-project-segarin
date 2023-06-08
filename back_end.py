@@ -1,37 +1,51 @@
 import os 
 import pathlib
+import json
 import pymysql
 from google.cloud import storage 
+from flask import Flask, render_template, request, jsonify
+from keras.models import load_model
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'my-project-segarin-26678-bfc7835d7a7d.json'
 STORAGE_CLASSES = "STANDAR"
 
-""" mydb = pymysql.connect(
-    host="localhost",
-    user="root",
-    password=""
-)
-mycursor = mydb.cursor()
- """ 
 
 class Mysql:
     def __init__(self, host, user, password, database):
         self.mydb = pymysql.connect(host=host, user=user, password=password,database=database)
     
-    def get_user(self, id_user,password):
-        mycursor = mydb.cursor()
-        query = "SELECT * FROM pengguna WHERE username = {id_user} & password = {password}"
-        mycursor.execute(query)
+    def get_user(self, username ,password):
+        mycursor = self.mydb.cursor()
+        query = "SELECT * FROM Profile WHERE Username =%s && Password =%s"
+        data = (username,password)
+        mycursor.execute(query,data)
         myresult = mycursor.fetchall()
         if(len(myresult)>0):
             return True
         else:
             return False
-    
-    def insert_user(self, id_user, password, email):
-        mycursor = mydb.cursor()
-        query = "INSERT INTO pengguna VALUES({id_user},{password},{email})"
+
+    def get_list_user(self):
+        mycursor = self.mydb.cursor()
+        query = "SELECT * FROM Profile"
         mycursor.execute(query)
+        myresult = mycursor.fetchall()
+        if(len(myresult)>0):
+            content_data =[]
+            user = {}
+            for data in myresult:
+                content ={'id': data[0], 'username': data[1],'email': data[2],'password': data[3]}
+                content_data.append(content)
+                content ={}
+            return content_data
+        else:
+            return False
+    
+    def insert_user(self, username, password, email):
+        mycursor = self.mydb.cursor()
+        query = "INSERT INTO Profile(Username,Email,Password) VALUES(%s,%s,%s)"
+        data = (username,password,email)
+        mycursor.execute(query,data)
 
         self.mydb.commit()
         if(mycursor.rowcount>0):
@@ -39,13 +53,29 @@ class Mysql:
         else:
             return False
 
-    def insert_foto(self,id_user,nama_file,keterangan=""):
-        mycursor - mydb.cursor()
-        query ="INSERT INTO pengguna VALUES({id_user},{nama_file},{keterangan})"
-        mycursor.execute(query)
+    def insert_foto(self,id_user,nama_file, TipeSayur, keterangan=""):
+        mycursor = self.mydb.cursor()
+        query ="INSERT INTO foto VALUES(%s,%s,%s,%s)"
+        data = (id_user,nama_file,TipeSayur,keterangan)
+        mycursor.execute(query,data)
         self.mydb.commit()
-        if(mycursor.rowcocunt>0):
+        if(mycursor.rowcount>0):
             return True
+        else:
+            return False
+
+    def get_list_foto(self):
+        mycursor = self.mydb.cursor()
+        query = "SELECT * FROM foto"
+        mycursor.execute(query)
+        myresult = mycursor.fetchall()
+        if(len(myresult)>0):
+            content_data =[]
+            for data in myresult:
+                content ={'id': data[0], 'username': data[1],'email': data[2],'password': data[3]}
+                content_data.append(content)
+                content ={}
+            return content_data
         else:
             return False
 
@@ -74,11 +104,11 @@ class GCStorage :
 
 
 def main():
-    bucket_name = "test_bucket_segarin"
+    """ bucket_name = "test_bucket_segarin"
     gcs = GCStorage(storage.Client())
     gcs_labs = gcs.list_blobs(bucket_name)
+ """
+    mysql = Mysql("localhost","root","","DatabaseSegarin")
 
-    for blob in gcs_labs:
-        path_download = os.getcwd()
-        blob.download_to_filename(os.path.join(path_download,blob.name))
+    print(mysql.get_list_foto())
 main()
