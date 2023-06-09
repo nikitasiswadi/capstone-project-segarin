@@ -6,7 +6,7 @@ from google.cloud import storage
 from flask import Flask, render_template, request, jsonify
 from keras.models import load_model
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'my-project-segarin-26678-bfc7835d7a7d.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'project_segarin.json'
 STORAGE_CLASSES = "STANDAR"
 
 
@@ -21,7 +21,13 @@ class Mysql:
         mycursor.execute(query,data)
         myresult = mycursor.fetchall()
         if(len(myresult)>0):
-            return True
+            content_data =[]
+            user = {}
+            for data in myresult:
+                content ={'id': data[0], 'username': data[1],'email': data[2],'password': data[3]}
+                content_data.append(content)
+                content ={}
+            return jsonify(content_data)
         else:
             return False
 
@@ -37,7 +43,17 @@ class Mysql:
                 content ={'id': data[0], 'username': data[1],'email': data[2],'password': data[3]}
                 content_data.append(content)
                 content ={}
-            return content_data
+            return jsonify(content_data)
+        else:
+            return False
+
+    def get_id_user(self):
+        mycursor = self.mydb.cursor()
+        query = "SELECT * FROM Profile WHERE Username =%s && Password =%s"
+        mycursor.execute(query)
+        myresult = mycursor.fetchall()
+        if(len(myresult)>0):
+            return [data for data in myresult]
         else:
             return False
     
@@ -90,10 +106,11 @@ class GCStorage :
         buckets = self.client.list_buckets()
         return [bucket for bucket in buckets]
 
-    def upload_file(self, bucket, file_destination, file_path):
+    def upload_file(self, bucket, file_destination, file_path, tipe):
+        bucket = self.client.get_bucket(bucket)
         blob = bucket.blob(file_destination)
-        blob.upload_from_filename(file_path)
-        return blob
+        blob.upload_from_string(file_path,content_type = tipe)
+        return "Data Berhasil Di Upload"
     
     def list_nama_blobs(self, bucket_name):
         files = self.client.list_blobs(bucket_name) #bisa menggunakan (foldername) pada argumentnya ex : ('bayam/') dan gunakan split untuk mendapatkan nama filenya
@@ -103,12 +120,3 @@ class GCStorage :
         return self.client.list_blobs(bucket_name)
 
 
-def main():
-    """ bucket_name = "test_bucket_segarin"
-    gcs = GCStorage(storage.Client())
-    gcs_labs = gcs.list_blobs(bucket_name)
- """
-    mysql = Mysql("localhost","root","","DatabaseSegarin")
-
-    print(mysql.get_list_foto())
-main()
