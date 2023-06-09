@@ -29,7 +29,7 @@ def home():
 @app.route("/getUser",methods=["POST","GET"])
 def getUser():
     data = [string[x] for x in request.form.values()]
-    return mysql.get_user(data[0],data[1]
+    return mysql.get_user(data[0],data[1])
 
 @app.route("/getListUser",methods=["GET"])
 def getListUser():
