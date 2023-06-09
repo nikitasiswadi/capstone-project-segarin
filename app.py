@@ -25,7 +25,7 @@ bucket_name = "segarin_bucket"
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return True
 @app.route("/getUser",methods=["POST","GET"])
 def getUser():
     data = [string[x] for x in request.form.values()]
@@ -38,7 +38,7 @@ def getListUser():
 @app.route("/insertUser",methods=["POST"])
 def insertUser():
     data = [string[x] for x in request.form.values()]
-    return print(insert_user(data[0],data[2],data[1]))
+    return insert_user(data[0],data[2],data[1])
 
 @app.route("/fotoKubis", methods =["POST"])
 def fotoKubis():
