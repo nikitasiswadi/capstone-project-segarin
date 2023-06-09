@@ -16,7 +16,7 @@ model_kangkung = load_model("model_kangkung.h5")
 
 app = Flask(__name__)
 
-mysql = Mysql("localhost","root","","DatabaseSegarin")
+mysql = Mysql("localhost","root","","SegarinDatabase")
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'project_segarin.json'
 
@@ -79,7 +79,7 @@ def fotoBayam():
     classname = ['Busuk', 'Segar']
     mysql.insert_foto(1,str(data_file.filename),"bayam/",str(classname[output_class]))
     return ("The predicted class is "+ str(classname[output_class]))
-    
+
 @app.route("/fotoKangkung", methods =["POST"])
 def fotoKangkung():
     data_file=  request.files['test']
