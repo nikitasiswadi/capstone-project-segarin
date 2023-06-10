@@ -53,7 +53,13 @@ class Mysql:
         mycursor.execute(query)
         myresult = mycursor.fetchall()
         if(len(myresult)>0):
-            return [data for data in myresult]
+            content_data =[]
+            user = {}
+            for data in myresult:
+                content ={'id': data[0], 'username': data[1],'email': data[2],'password': data[3]}
+                content_data.append(content)
+                content ={}
+            return jsonify(content_data)
         else:
             return False
     
@@ -88,7 +94,7 @@ class Mysql:
         if(len(myresult)>0):
             content_data =[]
             for data in myresult:
-                content ={'id': data[0], 'username': data[1],'email': data[2],'password': data[3]}
+                content ={'id': data[0], 'nama_file': data[1],'tipe_sayur': data[2],'keterangan': data[3]}
                 content_data.append(content)
                 content ={}
             return content_data
@@ -114,7 +120,13 @@ class GCStorage :
     
     def list_nama_blobs(self, bucket_name):
         files = self.client.list_blobs(bucket_name) #bisa menggunakan (foldername) pada argumentnya ex : ('bayam/') dan gunakan split untuk mendapatkan nama filenya
-        return [file.name for file in files]
+        content_data =[]
+        user = {}
+        for data in myresult:
+            content ={'nama_file': data.name}
+            content_data.append(content)
+            content ={}
+        return jsonify(content_data)
     
     def list_blobs(self, bucket_name):
         return self.client.list_blobs(bucket_name)

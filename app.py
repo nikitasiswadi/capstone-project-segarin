@@ -16,16 +16,26 @@ model_kangkung = load_model("model_kangkung.h5")
 
 app = Flask(__name__)
 
-mysql = Mysql("localhost","root","","SegarinDatabase")
+mysql = Mysql("localhost","root","","DatabaseSegarin")
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'project_segarin.json'
 
 gcs = GCStorage(storage.Client())
 bucket_name = "segarin_bucket"
 
-@app.route("/")
+@app.route("/kubis")
 def home():
-    return True
+    return render_template("kubis.html")
+
+@app.route("/bayam")
+def bayam():
+    return render_template("bayam.html")
+
+@app.route("/kangkung")
+def kangkung():
+    return render_template("kangkung.html")
+
+
 @app.route("/getUser",methods=["POST","GET"])
 def getUser():
     data = [string[x] for x in request.form.values()]
@@ -34,6 +44,9 @@ def getUser():
 @app.route("/getListUser",methods=["GET"])
 def getListUser():
     return mysql.get_list_user()
+@app.route("/getListFoto",methods=["GET"])
+def getListFoto():
+    return mysql.get_list_foto()
 
 @app.route("/insertUser",methods=["POST"])
 def insertUser():
@@ -44,9 +57,9 @@ def insertUser():
 def fotoKubis():
     data_file=  request.files['test']
     tipe = data_file.content_type
-    gcs.upload_file(bucket_name,os.path.join("kubis/",str(data_file.filename)),data_file.read(),tipe)
     img = Image.open(data_file)
-    data = io.BytesIO()
+    gcs.upload_file(bucket_name,os.path.join("kubis/",str(data_file.filename)),data_file.read(),tipe)
+    data = "foto_kubis"
     img.save(data, "JPEG")
     img = image.load_img(data,target_size=(256,256))
     x = image.img_to_array(img)
@@ -66,9 +79,9 @@ def fotoBayam():
     tipe = data_file.content_type
     gcs.upload_file(bucket_name,os.path.join("bayam/",str(data_file.filename)),data_file.read(),tipe)
     img = Image.open(data_file)
-    data = io.BytesIO()
+    data = "foto_bayam"
     img.save(data, "JPEG")
-    img = image.load_img(data,target_size=(256,256))
+    img = image.load_img(data,target_size=(128,128))
     x = image.img_to_array(img)
     x /= 255
     x = np.expand_dims(x,axis = 0)
@@ -86,7 +99,7 @@ def fotoKangkung():
     tipe = data_file.content_type
     gcs.upload_file(bucket_name,os.path.join("kangkung/",str(data_file.filename)),data_file.read(),tipe)
     img = Image.open(data_file)
-    data = io.BytesIO()
+    data = "foto_kangkung"
     img.save(data, "JPEG")
     img = image.load_img(data,target_size=(256,256))
     x = image.img_to_array(img)
