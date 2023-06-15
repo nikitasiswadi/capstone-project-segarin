@@ -44,6 +44,7 @@ def getUser():
 @app.route("/getListUser",methods=["GET"])
 def getListUser():
     return mysql.get_list_user()
+
 @app.route("/getListFoto",methods=["GET"])
 def getListFoto():
     return mysql.get_list_foto()
